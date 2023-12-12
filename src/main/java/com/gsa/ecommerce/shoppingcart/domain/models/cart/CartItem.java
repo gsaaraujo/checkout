@@ -4,31 +4,32 @@ import java.util.UUID;
 import java.math.BigDecimal;
 
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
+import com.gsa.ecommerce.shared.exceptions.ValidationException;
 
 public final class CartItem {
   private final UUID id;
   private UUID productId;
-  private Money price;
+  private Money unitPrice;
   private CartItemQuantity quantity;
 
-  private CartItem(UUID id, UUID productId, Money price, CartItemQuantity quantity) {
+  private CartItem(UUID id, UUID productId, Money unitPrice, CartItemQuantity quantity) {
     this.id = id;
     this.productId = productId;
-    this.price = price;
+    this.unitPrice = unitPrice;
     this.quantity = quantity;
   }
 
-  public static CartItem create(UUID productId, Money price, CartItemQuantity quantity) {
-    return new CartItem(UUID.randomUUID(), productId, price, quantity);
+  public static CartItem create(UUID productId, Money unitPrice, CartItemQuantity quantity) {
+    return new CartItem(UUID.randomUUID(), productId, unitPrice, quantity);
   }
 
-  public static CartItem reconstitute(UUID id, UUID productId, Money price, CartItemQuantity quantity) {
-    return new CartItem(id, productId, price, quantity);
+  public static CartItem reconstitute(UUID id, UUID productId, Money unitPrice, CartItemQuantity quantity) {
+    return new CartItem(id, productId, unitPrice, quantity);
   }
 
-  public Money totalPrice() {
-    BigDecimal money = price.amount().multiply(BigDecimal.valueOf(quantity.quantity()));
-    return Money.reconstitute(money);
+  public Money totalPrice() throws ValidationException {
+    BigDecimal money = unitPrice.amount().multiply(new BigDecimal(quantity.quantity()));
+    return Money.create(money);
   }
 
   public UUID id() {
@@ -39,8 +40,8 @@ public final class CartItem {
     return productId;
   }
 
-  public Money price() {
-    return price;
+  public Money unitPrice() {
+    return unitPrice;
   }
 
   public CartItemQuantity quantity() {
@@ -66,10 +67,10 @@ public final class CartItem {
         return false;
     } else if (!productId.equals(other.productId))
       return false;
-    if (price == null) {
-      if (other.price != null)
+    if (unitPrice == null) {
+      if (other.unitPrice != null)
         return false;
-    } else if (!price.equals(other.price))
+    } else if (!unitPrice.equals(other.unitPrice))
       return false;
     if (quantity == null) {
       if (other.quantity != null)

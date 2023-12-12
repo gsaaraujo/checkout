@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +20,7 @@ public class CartItemTest {
 
       assertAll(
           () -> assertEquals(UUID.fromString("1d95c593-8e61-479e-a1c3-8ef1cdfe4f02"), sut.productId()),
-          () -> assertEquals(new BigDecimal(5.50), sut.price().amount()));
+          () -> assertEquals(new BigDecimal(5.50), sut.unitPrice().amount()));
     } catch (Exception e) {
       //
     }
@@ -38,7 +37,7 @@ public class CartItemTest {
     assertAll(
         () -> assertEquals(UUID.fromString("9220c937-b59e-42cd-a87c-a8fdb752484c"), sut.id()),
         () -> assertEquals(UUID.fromString("1d95c593-8e61-479e-a1c3-8ef1cdfe4f02"), sut.productId()),
-        () -> assertEquals(new BigDecimal(5.50), sut.price().amount()),
+        () -> assertEquals(new BigDecimal(5.50), sut.unitPrice().amount()),
         () -> assertEquals(10, sut.quantity().quantity()));
   }
 
@@ -48,7 +47,7 @@ public class CartItemTest {
       Money money = Money.create(new BigDecimal(5.50));
       CartItemQuantity cartItemQuantity = CartItemQuantity.create(11);
 
-      CartItem sut = CartItem.create(UUID.fromString("1d95c593-8e61-479e-a1c3-8ef1cdfe4f02"), money, cartItemQuantity);
+      CartItem sut = CartItem.create(UUID.randomUUID(), money, cartItemQuantity);
 
       assertEquals(new BigDecimal(60.5), sut.totalPrice().amount());
     } catch (Exception e) {

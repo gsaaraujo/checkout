@@ -1,8 +1,12 @@
 package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 
 import java.util.UUID;
+import java.util.Optional;
 import java.util.ArrayList;
 import java.math.BigDecimal;
+
+import com.gsa.ecommerce.shoppingcart.domain.models.Money;
+import com.gsa.ecommerce.shared.exceptions.ValidationException;
 
 public final class Cart {
   private final UUID id;
@@ -23,22 +27,49 @@ public final class Cart {
     return new Cart(id, customerId, items);
   }
 
-  public void addItem(CartItem item) {
-    items.add(item);
+  public void addItem(CartItem newItem) throws ValidationException {
+    Optional<CartItem> itemFound = this.items.stream().filter(item -> item.id().equals(newItem.id())).findFirst();
+
+    if (itemFound.isPresent()) {
+      this.items.removeIf(item -> item.id().equals(itemFound.get().id()));
+
+      CartItemQuantity cartItemQuantity = CartItemQuantity
+          .create(itemFound.get().quantity().quantity() + newItem.quantity().quantity());
+
+      CartItem cartItem = CartItem.reconstitute(itemFound.get().id(),
+          itemFound.get().productId(),
+          itemFound.get().unitPrice(),
+          cartItemQuantity);
+
+      items.add(cartItem);
+      return;
+    }
+
+    items.add(newItem);
   }
 
   public void removeItem(UUID itemId) {
-    items.removeIf(item -> item.id().equals(itemId));
+    this.items.removeIf(item -> item.id().equals(itemId));
   }
 
-  public BigDecimal totalPrice() {
-    var totalPrice = new BigDecimal(0);
+  public BigDecimal totalPrice() throws ValidationException {
+    BigDecimal totalPrice = new BigDecimal(0);
 
-    for (CartItem item : items) {
+    for (CartItem item : this.items) {
       totalPrice = totalPrice.add(item.totalPrice().amount());
     }
 
     return totalPrice;
+  }
+
+  public int totalQuantityOfItems() {
+    int totalItems = 0;
+
+    for (CartItem item : this.items) {
+      totalItems += item.quantity().quantity();
+    }
+
+    return totalItems;
   }
 
   public UUID id() {

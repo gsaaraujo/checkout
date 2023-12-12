@@ -17,7 +17,7 @@ import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway;
 
 @Service
 public class AddItemToCart {
-  public record Input(UUID cartId, UUID productId, UUID customerId, int quantity) {
+  public record Input(UUID customerId, UUID productId, int quantity) {
   }
 
   private final CartRepository cartRepository;
@@ -30,7 +30,7 @@ public class AddItemToCart {
   }
 
   public void execute(Input input) throws DomainException, ValidationException {
-    Optional<Cart> cartFound = cartRepository.findOneById(input.cartId);
+    Optional<Cart> cartFound = cartRepository.findOneByCustomerId(input.customerId());
     Optional<ProductGateway.ProductDTO> productFound = productGateway.findOneById(input.productId);
 
     productFound.orElseThrow(() -> new DomainException("Product not found"));
