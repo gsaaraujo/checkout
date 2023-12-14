@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.ArrayList;
 import java.math.BigDecimal;
 
-import com.gsa.ecommerce.shoppingcart.domain.models.Money;
 import com.gsa.ecommerce.shared.exceptions.ValidationException;
 
 public final class Cart {

@@ -4,10 +4,10 @@ import java.util.UUID;
 import java.util.Optional;
 
 public interface CartRepository {
-  public Cart create(Cart cart);
+  public void create(Cart cart);
 
-  public Optional<Cart> findOneById(UUID id);
+  public Optional<Cart> findOneByCustomerId(UUID customerId);
 
-  public Cart update(Cart cart);
+  public void update(Cart cart);
 
 }

@@ -15,24 +15,21 @@ public class FakeCartRepository implements CartRepository {
   }
 
   @Override
-  public Cart create(Cart cart) {
+  public void create(Cart cart) {
     this.carts.add(cart);
-    return cart;
   }
 
   @Override
-  public Optional<Cart> findOneById(UUID id) {
-    return this.carts.stream().filter(cart -> cart.id().equals(id)).findFirst();
+  public Optional<Cart> findOneByCustomerId(UUID customerId) {
+    return this.carts.stream().filter(cart -> cart.customerId().equals(customerId)).findFirst();
   }
 
   @Override
-  public Cart update(Cart updatedCart) {
+  public void update(Cart updatedCart) {
     Optional<Cart> cartFound = this.carts.stream().filter(cart -> cart.id().equals(updatedCart.id())).findFirst();
     if (cartFound.isPresent()) {
       this.carts.remove(cartFound.get());
       this.carts.add(updatedCart);
     }
-
-    return updatedCart;
   }
 }

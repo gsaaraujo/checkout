@@ -1,17 +1,17 @@
 package com.gsa.ecommerce.shoppingcart.application.usecases;
 
-import java.util.ArrayList;
 import java.util.UUID;
+import java.util.ArrayList;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 import com.gsa.ecommerce.shoppingcart.infra.gateways.product.FakeProductGateway;
 import com.gsa.ecommerce.shoppingcart.infra.repositories.cart.FakeCartRepository;
 import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway.ProductDTO;
-import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 
 public class AddItemToCartTest {
   private AddItemToCart addItemToCart;
@@ -31,7 +31,7 @@ public class AddItemToCartTest {
       ProductDTO productDTO = new ProductDTO(UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
           new BigDecimal(20));
       fakeProductGateway.products.add(productDTO);
-      AddItemToCart.Input input = new AddItemToCart.Input(UUID.fromString("352c9011-9f69-428c-a62c-d5ceda66d329"),
+      AddItemToCart.Input input = new AddItemToCart.Input(
           UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
           UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
           4);
@@ -53,7 +53,7 @@ public class AddItemToCartTest {
           new BigDecimal(20));
       fakeCartRepository.carts.add(cart);
       fakeProductGateway.products.add(productDTO);
-      AddItemToCart.Input input = new AddItemToCart.Input(UUID.fromString("a9d1189d-e1f5-4106-9a80-853fb84d2d2e"),
+      AddItemToCart.Input input = new AddItemToCart.Input(
           UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
           UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
           4);
@@ -71,7 +71,7 @@ public class AddItemToCartTest {
   @Test
   public void it_should_throw_exception_when_product_is_not_found() {
     try {
-      AddItemToCart.Input input = new AddItemToCart.Input(UUID.fromString("352c9011-9f69-428c-a62c-d5ceda66d329"),
+      AddItemToCart.Input input = new AddItemToCart.Input(
           UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
           UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
           4);
