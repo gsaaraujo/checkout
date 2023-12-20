@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsa.ecommerce.core.database.ProductDatabase;
 import com.gsa.ecommerce.core.database.orms.ProductOrm;

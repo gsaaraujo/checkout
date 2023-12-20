@@ -5,16 +5,15 @@ import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsa.ecommerce.core.database.CartDatabase;
+import com.gsa.ecommerce.core.database.orms.CartOrm;
+import com.gsa.ecommerce.core.database.ProductDatabase;
+import com.gsa.ecommerce.core.database.orms.ProductOrm;
 import com.gsa.ecommerce.core.database.CartItemDatabase;
 import com.gsa.ecommerce.core.database.CustomerDatabase;
-import com.gsa.ecommerce.core.database.ProductDatabase;
 import com.gsa.ecommerce.core.database.orms.CartItemOrm;
-import com.gsa.ecommerce.core.database.orms.CartOrm;
 import com.gsa.ecommerce.core.database.orms.CustomerOrm;
-import com.gsa.ecommerce.core.database.orms.ProductOrm;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItem;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartRepository;
