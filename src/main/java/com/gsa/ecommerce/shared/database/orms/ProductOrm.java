@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shoppingcart.infra.database.orms;
+package com.gsa.ecommerce.shared.database.orms;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -9,13 +9,13 @@ public class ProductOrm {
   @Id
   String id;
 
-  @Column()
+  @Column
   String name;
 
-  @Column()
+  @Column
   String description;
 
-  @Column()
+  @Column
   double price;
 
   public ProductOrm() {

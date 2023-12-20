@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shoppingcart.infra.database.orms;
+package com.gsa.ecommerce.shared.database.orms;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -15,7 +15,7 @@ public class CartItemOrm {
   @JoinColumn(name = "cart_id")
   CartOrm cart;
 
-  @ManyToOne()
+  @ManyToOne
   @JoinColumn(name = "product_id")
   ProductOrm product;
 

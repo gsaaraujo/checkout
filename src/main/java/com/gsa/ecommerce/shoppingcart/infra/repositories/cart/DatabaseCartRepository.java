@@ -4,29 +4,28 @@ import java.util.UUID;
 import java.util.Optional;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gsa.ecommerce.shared.database.CartDatabase;
+import com.gsa.ecommerce.shared.database.orms.CartOrm;
+import com.gsa.ecommerce.shared.database.orms.ProductOrm;
+import com.gsa.ecommerce.shared.database.CartItemDatabase;
+import com.gsa.ecommerce.shared.database.CustomerDatabase;
+import com.gsa.ecommerce.shared.database.ProductDatabase;
+import com.gsa.ecommerce.shared.database.orms.CartItemOrm;
+import com.gsa.ecommerce.shared.database.orms.CustomerOrm;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItem;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartRepository;
-import com.gsa.ecommerce.shoppingcart.infra.database.CartItemDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.CartDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.CustomerDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.ProductDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CartItemOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CartOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CustomerOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.ProductOrm;
 
-@Service
+@Component
 public class DatabaseCartRepository implements CartRepository {
   private final CartDatabase cartDatabase;
   private final CartItemDatabase cartItemDatabase;
   private final CustomerDatabase customerDatabase;
   private final ProductDatabase productDatabase;
 
-  @Autowired
   public DatabaseCartRepository(CartDatabase cartDatabase, CartItemDatabase cartItemDatabase,
       CustomerDatabase customerDatabase,
       ProductDatabase productDatabase) {

@@ -8,10 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.http.MediaType;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,20 +18,19 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CartOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.CartDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.ProductOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.ProductDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CartItemOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.CustomerOrm;
-import com.gsa.ecommerce.shoppingcart.infra.database.CartItemDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.CustomerDatabase;
+import com.gsa.ecommerce.shared.database.CartDatabase;
+import com.gsa.ecommerce.shared.database.orms.CartOrm;
+import com.gsa.ecommerce.shared.database.orms.ProductOrm;
+import com.gsa.ecommerce.shared.database.ProductDatabase;
+import com.gsa.ecommerce.shared.database.CartItemDatabase;
+import com.gsa.ecommerce.shared.database.CustomerDatabase;
+import com.gsa.ecommerce.shared.database.orms.CartItemOrm;
+import com.gsa.ecommerce.shared.database.orms.CustomerOrm;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 public class AddItemToCartControllerTest {
-
   private final MockMvc mockMvc;
   private final ProductDatabase productDatabase;
   private final CustomerDatabase customerDatabase;

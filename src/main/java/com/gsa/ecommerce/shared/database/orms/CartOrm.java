@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shoppingcart.infra.database.orms;
+package com.gsa.ecommerce.shared.database.orms;
 
 import java.util.List;
 import jakarta.persistence.Id;

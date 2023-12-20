@@ -4,17 +4,17 @@ import java.util.UUID;
 import java.util.Optional;
 import java.math.BigDecimal;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway;
-import com.gsa.ecommerce.shoppingcart.infra.database.ProductDatabase;
-import com.gsa.ecommerce.shoppingcart.infra.database.orms.ProductOrm;
 
-@Service
+import com.gsa.ecommerce.shared.database.ProductDatabase;
+import com.gsa.ecommerce.shared.database.orms.ProductOrm;
+import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway;
+
+@Component
 public class DatabaseProductGateway implements ProductGateway {
   private final ProductDatabase productDatabase;
 
-  @Autowired
   public DatabaseProductGateway(ProductDatabase productDatabase) {
     this.productDatabase = productDatabase;
   }
