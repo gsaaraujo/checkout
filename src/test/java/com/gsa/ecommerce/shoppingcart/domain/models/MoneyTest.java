@@ -3,9 +3,10 @@ package com.gsa.ecommerce.shoppingcart.domain.models;
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
+import com.gsa.ecommerce.core.exceptions.ValidationException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTest {
   @Test

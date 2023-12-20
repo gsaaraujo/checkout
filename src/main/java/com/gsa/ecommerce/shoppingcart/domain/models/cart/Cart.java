@@ -1,11 +1,12 @@
 package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 
 import java.util.UUID;
+
+import com.gsa.ecommerce.core.exceptions.ValidationException;
+
 import java.util.Optional;
 import java.util.ArrayList;
 import java.math.BigDecimal;
-
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
 
 public final class Cart {
   private final UUID id;

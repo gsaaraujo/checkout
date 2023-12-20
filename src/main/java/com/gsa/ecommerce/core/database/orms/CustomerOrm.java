@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shared.database.orms;
+package com.gsa.ecommerce.core.database.orms;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;

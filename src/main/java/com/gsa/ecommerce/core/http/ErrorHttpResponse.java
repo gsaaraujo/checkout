@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shared.http;
+package com.gsa.ecommerce.core.http;
 
 public record ErrorHttpResponse(String error) {
 

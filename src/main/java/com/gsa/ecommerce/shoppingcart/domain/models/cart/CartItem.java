@@ -3,8 +3,8 @@ package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 import java.util.UUID;
 import java.math.BigDecimal;
 
+import com.gsa.ecommerce.core.exceptions.ValidationException;
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
 
 public final class CartItem {
   private final UUID id;

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gsa.ecommerce.shared.http.ErrorHttpResponse;
+import com.gsa.ecommerce.core.http.ErrorHttpResponse;
 import com.gsa.ecommerce.shoppingcart.application.usecases.AddItemToCart;
 
 @RestController

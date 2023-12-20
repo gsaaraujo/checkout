@@ -15,17 +15,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.gsa.ecommerce.core.database.CartDatabase;
+import com.gsa.ecommerce.core.database.CartItemDatabase;
+import com.gsa.ecommerce.core.database.CustomerDatabase;
+import com.gsa.ecommerce.core.database.ProductDatabase;
+import com.gsa.ecommerce.core.database.orms.CartItemOrm;
+import com.gsa.ecommerce.core.database.orms.CartOrm;
+import com.gsa.ecommerce.core.database.orms.CustomerOrm;
+import com.gsa.ecommerce.core.database.orms.ProductOrm;
+
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-import com.gsa.ecommerce.shared.database.CartDatabase;
-import com.gsa.ecommerce.shared.database.orms.CartOrm;
-import com.gsa.ecommerce.shared.database.orms.ProductOrm;
-import com.gsa.ecommerce.shared.database.ProductDatabase;
-import com.gsa.ecommerce.shared.database.CartItemDatabase;
-import com.gsa.ecommerce.shared.database.CustomerDatabase;
-import com.gsa.ecommerce.shared.database.orms.CartItemOrm;
-import com.gsa.ecommerce.shared.database.orms.CustomerOrm;
 
 @SpringBootTest
 @AutoConfigureMockMvc

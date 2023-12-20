@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shared.exceptions;
+package com.gsa.ecommerce.core.exceptions;
 
 import java.util.Map;
 import java.util.ArrayList;

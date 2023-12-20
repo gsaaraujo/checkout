@@ -5,8 +5,9 @@ import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
-import com.gsa.ecommerce.shared.messagequeue.MessageQueue;
-import com.gsa.ecommerce.shared.exceptions.DomainException;
+
+import com.gsa.ecommerce.core.exceptions.DomainException;
+import com.gsa.ecommerce.core.messagequeue.MessageQueue;
 import com.gsa.ecommerce.order.application.gateways.CartGateway;
 import com.gsa.ecommerce.order.application.gateways.OrderGateway;
 import com.gsa.ecommerce.order.application.gateways.CustomerGateway;

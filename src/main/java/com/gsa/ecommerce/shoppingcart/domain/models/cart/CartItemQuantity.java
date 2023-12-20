@@ -1,6 +1,6 @@
 package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
+import com.gsa.ecommerce.core.exceptions.ValidationException;
 
 public final class CartItemQuantity {
   private final int quantity;

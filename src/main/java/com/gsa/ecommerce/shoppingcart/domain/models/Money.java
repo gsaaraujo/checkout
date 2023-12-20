@@ -2,7 +2,7 @@ package com.gsa.ecommerce.shoppingcart.domain.models;
 
 import java.math.BigDecimal;
 
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
+import com.gsa.ecommerce.core.exceptions.ValidationException;
 
 public final class Money {
   private final BigDecimal amount;

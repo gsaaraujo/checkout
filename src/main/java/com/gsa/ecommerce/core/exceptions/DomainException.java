@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shared.exceptions;
+package com.gsa.ecommerce.core.exceptions;
 
 public class DomainException extends Exception {
   public DomainException(String message) {

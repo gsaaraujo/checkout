@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
-import com.gsa.ecommerce.shared.exceptions.DomainException;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
-import com.gsa.ecommerce.shared.exceptions.ValidationException;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItem;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartRepository;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItemQuantity;
+import com.gsa.ecommerce.core.exceptions.DomainException;
+import com.gsa.ecommerce.core.exceptions.ValidationException;
 import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway;
 
 @Component
