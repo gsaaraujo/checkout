@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.messagequeue;
+package com.gsa.ecommerce.core.infra.messagequeue;
 
 import java.util.Map;
 import java.util.HashMap;

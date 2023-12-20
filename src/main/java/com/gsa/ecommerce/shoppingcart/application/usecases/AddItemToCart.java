@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.gsa.ecommerce.core.exceptions.DomainException;
+import com.gsa.ecommerce.core.infra.exceptions.DomainException;
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
-import com.gsa.ecommerce.core.exceptions.ValidationException;
+import com.gsa.ecommerce.core.infra.exceptions.ValidationException;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItem;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartRepository;

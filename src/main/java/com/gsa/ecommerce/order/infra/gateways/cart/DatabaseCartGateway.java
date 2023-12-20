@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
-import com.gsa.ecommerce.core.database.CartDatabase;
-import com.gsa.ecommerce.core.database.orms.CartItemOrm;
-import com.gsa.ecommerce.core.database.orms.CartOrm;
+import com.gsa.ecommerce.core.infra.database.CartDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.CartItemOrm;
+import com.gsa.ecommerce.core.infra.database.orms.CartOrm;
 import com.gsa.ecommerce.order.application.gateways.CartGateway;
 
 @Component

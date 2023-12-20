@@ -5,14 +5,14 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import com.gsa.ecommerce.core.database.CustomerDatabase;
-import com.gsa.ecommerce.core.database.OrderDatabase;
-import com.gsa.ecommerce.core.database.OrderItemDatabase;
-import com.gsa.ecommerce.core.database.ProductDatabase;
-import com.gsa.ecommerce.core.database.orms.CustomerOrm;
-import com.gsa.ecommerce.core.database.orms.OrderItemOrm;
-import com.gsa.ecommerce.core.database.orms.OrderOrm;
-import com.gsa.ecommerce.core.database.orms.ProductOrm;
+import com.gsa.ecommerce.core.infra.database.CustomerDatabase;
+import com.gsa.ecommerce.core.infra.database.OrderDatabase;
+import com.gsa.ecommerce.core.infra.database.OrderItemDatabase;
+import com.gsa.ecommerce.core.infra.database.ProductDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.CustomerOrm;
+import com.gsa.ecommerce.core.infra.database.orms.OrderItemOrm;
+import com.gsa.ecommerce.core.infra.database.orms.OrderOrm;
+import com.gsa.ecommerce.core.infra.database.orms.ProductOrm;
 import com.gsa.ecommerce.order.application.gateways.OrderGateway;
 
 @Component

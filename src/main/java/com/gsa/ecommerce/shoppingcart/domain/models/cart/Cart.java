@@ -2,7 +2,7 @@ package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 
 import java.util.UUID;
 
-import com.gsa.ecommerce.core.exceptions.ValidationException;
+import com.gsa.ecommerce.core.infra.exceptions.ValidationException;
 
 import java.util.Optional;
 import java.util.ArrayList;

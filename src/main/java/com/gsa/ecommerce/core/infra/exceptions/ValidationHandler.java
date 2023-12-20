@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.exceptions;
+package com.gsa.ecommerce.core.infra.exceptions;
 
 import java.util.Map;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.http;
+package com.gsa.ecommerce.core.infra.http;
 
 public record SuccessHttpResponse<T>(T data) {
 }

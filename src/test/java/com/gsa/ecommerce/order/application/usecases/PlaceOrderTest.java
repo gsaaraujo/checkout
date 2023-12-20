@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.gsa.ecommerce.order.infra.gateways.cart.FakeCartGateway;
 import com.gsa.ecommerce.order.infra.gateways.customer.FakeCustomerGateway;
 import com.gsa.ecommerce.order.infra.gateways.order.FakeOrderGateway;
-import com.gsa.ecommerce.core.messagequeue.FakeMessageQueue;
+import com.gsa.ecommerce.core.infra.messagequeue.FakeMessageQueue;
 import com.gsa.ecommerce.order.application.gateways.CartGateway.CartDTO;
 import com.gsa.ecommerce.order.application.gateways.CartGateway.CartItemDTO;
 import com.gsa.ecommerce.order.application.gateways.CustomerGateway.CustomerDTO;

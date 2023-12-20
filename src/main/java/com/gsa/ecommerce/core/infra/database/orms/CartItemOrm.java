@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.database.orms;
+package com.gsa.ecommerce.core.infra.database.orms;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -6,42 +6,38 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
-@Entity(name = "order_items")
-public class OrderItemOrm {
+@Entity(name = "cart_items")
+public class CartItemOrm {
   @Id
   String id;
 
   @ManyToOne
-  @JoinColumn(name = "order_id")
-  OrderOrm order;
+  @JoinColumn(name = "cart_id")
+  CartOrm cart;
 
   @ManyToOne
   @JoinColumn(name = "product_id")
   ProductOrm product;
 
-  @Column
+  @Column(name = "quantity")
   int quantity;
 
-  @Column
-  double price;
-
-  public OrderItemOrm() {
+  public CartItemOrm() {
   }
 
-  public OrderItemOrm(String id, OrderOrm order, ProductOrm product, int quantity, double price) {
+  public CartItemOrm(String id, CartOrm cart, ProductOrm product, int quantity) {
     this.id = id;
-    this.order = order;
+    this.cart = cart;
     this.product = product;
     this.quantity = quantity;
-    this.price = price;
   }
 
   public String id() {
     return id;
   }
 
-  public OrderOrm order() {
-    return order;
+  public CartOrm cart() {
+    return cart;
   }
 
   public ProductOrm product() {
@@ -50,9 +46,5 @@ public class OrderItemOrm {
 
   public int quantity() {
     return quantity;
-  }
-
-  public double price() {
-    return price;
   }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gsa.ecommerce.core.http.ErrorHttpResponse;
+import com.gsa.ecommerce.core.infra.http.ErrorHttpResponse;
 import com.gsa.ecommerce.order.application.usecases.PlaceOrder;
 
 @RestController

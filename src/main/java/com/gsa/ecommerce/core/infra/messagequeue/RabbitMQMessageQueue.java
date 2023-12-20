@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.messagequeue;
+package com.gsa.ecommerce.core.infra.messagequeue;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.AmqpAdmin;

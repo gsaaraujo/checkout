@@ -3,7 +3,7 @@ package com.gsa.ecommerce.shoppingcart.domain.models.cart;
 import java.util.UUID;
 import java.math.BigDecimal;
 
-import com.gsa.ecommerce.core.exceptions.ValidationException;
+import com.gsa.ecommerce.core.infra.exceptions.ValidationException;
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
 
 public final class CartItem {

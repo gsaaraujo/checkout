@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
-import com.gsa.ecommerce.core.database.ProductDatabase;
-import com.gsa.ecommerce.core.database.orms.ProductOrm;
+import com.gsa.ecommerce.core.infra.database.ProductDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.ProductOrm;
 import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway;
 
 @Component

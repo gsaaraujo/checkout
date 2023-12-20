@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.core.database.orms;
+package com.gsa.ecommerce.core.infra.database.orms;
 
 import java.util.List;
 import jakarta.persistence.Id;
