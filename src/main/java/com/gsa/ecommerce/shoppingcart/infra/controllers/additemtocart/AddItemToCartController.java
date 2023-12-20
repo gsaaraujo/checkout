@@ -1,4 +1,4 @@
-package com.gsa.ecommerce.shoppingcart.infra.controllers.additemtocartcontroller;
+package com.gsa.ecommerce.shoppingcart.infra.controllers.additemtocart;
 
 import java.util.UUID;
 import jakarta.validation.Valid;
