@@ -1,5 +1,6 @@
 package com.gsa.ecommerce.shoppingcart.infra.controllers.additemtocart;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.NotBlank;
@@ -16,9 +17,10 @@ public class AddItemToCartInput {
   private String customerId;
 
   @NotNull(message = "quantity is required")
-  private int quantity;
+  @Min(value = 1, message = "quantity must be greater than or equal to 1")
+  private Integer quantity;
 
-  public AddItemToCartInput(String productId, String customerId, int quantity) {
+  public AddItemToCartInput(String productId, String customerId, Integer quantity) {
     this.productId = productId;
     this.customerId = customerId;
     this.quantity = quantity;
@@ -32,7 +34,7 @@ public class AddItemToCartInput {
     return customerId;
   }
 
-  public int quantity() {
+  public Integer quantity() {
     return quantity;
   }
 }

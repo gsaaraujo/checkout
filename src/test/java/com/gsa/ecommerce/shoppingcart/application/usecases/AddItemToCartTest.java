@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
+import com.gsa.ecommerce.order.infra.gateways.customer.FakeCustomerGateway;
 import com.gsa.ecommerce.shoppingcart.infra.gateways.product.FakeProductGateway;
 import com.gsa.ecommerce.shoppingcart.infra.repositories.cart.FakeCartRepository;
 import com.gsa.ecommerce.shoppingcart.application.gateways.ProductGateway.ProductDTO;
@@ -17,12 +18,14 @@ public class AddItemToCartTest {
   private AddItemToCart addItemToCart;
   private FakeCartRepository fakeCartRepository;
   private FakeProductGateway fakeProductGateway;
+  private FakeCustomerGateway fakeCustomerGateway;
 
   @BeforeEach
   void beforeEach() {
     fakeCartRepository = new FakeCartRepository();
     fakeProductGateway = new FakeProductGateway();
-    addItemToCart = new AddItemToCart(fakeCartRepository, fakeProductGateway);
+    fakeCustomerGateway = new FakeCustomerGateway();
+    addItemToCart = new AddItemToCart(fakeCartRepository, fakeProductGateway, fakeCustomerGateway);
   }
 
   @Test

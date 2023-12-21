@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.gsa.ecommerce.core.infra.exceptions.DomainException;
 import com.gsa.ecommerce.shoppingcart.domain.models.Money;
 import com.gsa.ecommerce.core.infra.exceptions.ValidationException;
+import com.gsa.ecommerce.order.application.gateways.CustomerGateway;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartItem;
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.CartRepository;
@@ -21,13 +22,21 @@ public class AddItemToCart {
 
   private final CartRepository cartRepository;
   private final ProductGateway productGateway;
+  private final CustomerGateway customerGateway;
 
-  public AddItemToCart(CartRepository cartRepository, ProductGateway productGateway) {
+  public AddItemToCart(CartRepository cartRepository, ProductGateway productGateway, CustomerGateway customerGateway) {
     this.cartRepository = cartRepository;
     this.productGateway = productGateway;
+    this.customerGateway = customerGateway;
   }
 
   public void execute(Input input) throws DomainException, ValidationException {
+    boolean customerExists = customerGateway.exists(input.customerId());
+
+    if (!customerExists) {
+      throw new DomainException("Customer not found");
+    }
+
     Optional<Cart> cartFound = cartRepository.findOneByCustomerId(input.customerId());
     Optional<ProductGateway.ProductDTO> productFound = productGateway.findOneById(input.productId);
 

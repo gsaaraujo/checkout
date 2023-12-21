@@ -35,6 +35,11 @@ public class AddItemToCartController {
       addItemToCart.execute(AddItemToCarInput);
       return ResponseEntity.noContent().build();
     } catch (Exception exception) {
+      if (exception.getMessage().equals("Customer not found")) {
+        ErrorHttpResponse error = new ErrorHttpResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+      }
+
       if (exception.getMessage().equals("Product not found")) {
         ErrorHttpResponse error = new ErrorHttpResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
