@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.gsa.ecommerce.shoppingcart.domain.models.cart.Cart;
+import com.gsa.ecommerce.order.application.gateways.CustomerGateway.CustomerDTO;
 import com.gsa.ecommerce.order.infra.gateways.customer.FakeCustomerGateway;
 import com.gsa.ecommerce.shoppingcart.infra.gateways.product.FakeProductGateway;
 import com.gsa.ecommerce.shoppingcart.infra.repositories.cart.FakeCartRepository;
@@ -72,8 +73,29 @@ public class AddItemToCartTest {
   }
 
   @Test
+  public void it_should_throw_exception_when_customer_is_not_found() {
+    try {
+      ProductDTO productDTO = new ProductDTO(UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
+          new BigDecimal(20));
+      fakeProductGateway.products.add(productDTO);
+
+      AddItemToCart.Input input = new AddItemToCart.Input(
+          UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
+          UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
+          4);
+
+      addItemToCart.execute(input);
+    } catch (Exception e) {
+      assertEquals("Customer not found", e.getMessage());
+    }
+  }
+
+  @Test
   public void it_should_throw_exception_when_product_is_not_found() {
     try {
+      CustomerDTO customerDTO = new CustomerDTO(UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"));
+      fakeCustomerGateway.customers.add(customerDTO);
+
       AddItemToCart.Input input = new AddItemToCart.Input(
           UUID.fromString("edd719ad-9d5e-4400-8c84-2fb9e90ecff0"),
           UUID.fromString("a94e0b42-2547-4812-b59c-19c593cb3358"),
