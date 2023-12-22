@@ -85,45 +85,79 @@ public class PlaceOrderControllerTest {
   }
 
   @Test
-  public void it_should_fail_if_cart_id_is_not_provided() throws Exception {
+  public void it_should_fail_if_any_property_is_missing() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.post("/orders")
         .contentType(MediaType.APPLICATION_JSON).content("""
-            {
-              "customerId": "438da73c-789c-4558-b66c-3f780695fc25"
-            }
+            {}
             """))
         .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+        .andExpect(MockMvcResultMatchers.status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.cartId").value("cartId is required"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.customerId").value("customerId is required"));
 
   }
 
   @Test
-  public void it_should_fail_if_customer_id_is_not_provided() throws Exception {
+  public void it_should_fail_if_any_property_is_empty() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.post("/orders")
         .contentType(MediaType.APPLICATION_JSON).content("""
             {
-              "cartId": "69b4c0c7-552b-435a-b522-e347a1da07f5"
+              "cartId": " ",
+              "customerId": " "
             }
             """))
         .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.status().isBadRequest());
+        .andExpect(MockMvcResultMatchers.status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.cartId").exists())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.customerId").exists());
+  }
+
+  @Test
+  public void it_should_fail_if_ids_are_not_uuid() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post("/orders")
+        .contentType(MediaType.APPLICATION_JSON).content("""
+            {
+              "cartId": "abc",
+              "customerId": "abc"
+            }
+            """))
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().isBadRequest())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.cartId").value("cartId must be a valid UUID"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors.customerId").value("customerId must be a valid UUID"));
   }
 
   @Test
   public void it_should_fail_if_customer_is_not_found() throws Exception {
+    ProductOrm productOrm = new ProductOrm(UUID.randomUUID().toString(),
+        "any_name", "any_description", 24.40);
+    CustomerOrm customerOrm = new CustomerOrm("438da73c-789c-4558-b66c-3f780695fc25", "any_customer_name", null);
+    CartOrm cartOrm = new CartOrm("69b4c0c7-552b-435a-b522-e347a1da07f5", customerOrm, null);
+    this.productDatabase.save(productOrm);
+    this.customerDatabase.save(customerOrm);
+    this.cartDatabase.save(cartOrm);
+
     mockMvc.perform(MockMvcRequestBuilders.post("/orders")
         .contentType(MediaType.APPLICATION_JSON).content("""
             {
               "cartId": "69b4c0c7-552b-435a-b522-e347a1da07f5",
-              "customerId": "438da73c-789c-4558-b66c-3f780695fc25"
+              "customerId": "6037d69b-1f02-4362-8fdf-da3081c9835c"
             }
             """))
         .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.status().isNotFound());
+        .andExpect(MockMvcResultMatchers.status().isNotFound())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Customer not found"));
+
   }
 
   @Test
   public void it_should_fail_if_cart_is_not_found() throws Exception {
+    ProductOrm productOrm = new ProductOrm(UUID.randomUUID().toString(),
+        "any_name", "any_description", 24.40);
+    CustomerOrm customerOrm = new CustomerOrm("438da73c-789c-4558-b66c-3f780695fc25", "any_customer_name", null);
+    this.productDatabase.save(productOrm);
+    this.customerDatabase.save(customerOrm);
+
     mockMvc.perform(MockMvcRequestBuilders.post("/orders")
         .contentType(MediaType.APPLICATION_JSON).content("""
             {
@@ -132,6 +166,8 @@ public class PlaceOrderControllerTest {
             }
             """))
         .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.status().isNotFound());
+        .andExpect(MockMvcResultMatchers.status().isNotFound())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.error").value("Cart not found"));
+
   }
 }
