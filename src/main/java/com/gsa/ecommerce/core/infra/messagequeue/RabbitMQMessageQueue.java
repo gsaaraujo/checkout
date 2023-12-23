@@ -2,25 +2,23 @@ package com.gsa.ecommerce.core.infra.messagequeue;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.core.AmqpTemplate;
 
 @Component
 public class RabbitMQMessageQueue implements MessageQueue {
+  private final AmqpAdmin admin;
+  private final AmqpTemplate amqpTemplate;
 
-  @Override
-  public void publish(String queueName, Object message) {
-    ConnectionFactory connectionFactory = new CachingConnectionFactory();
-    AmqpAdmin admin = new RabbitAdmin(connectionFactory);
-    Queue queue = new Queue(queueName);
-    admin.declareQueue(queue);
-
-    AmqpTemplate amqpTemplate = new RabbitTemplate(connectionFactory);
-    amqpTemplate.convertAndSend(queueName, message);
+  public RabbitMQMessageQueue(AmqpAdmin admin, AmqpTemplate amqpTemplate) {
+    this.admin = admin;
+    this.amqpTemplate = amqpTemplate;
   }
 
+  @Override
+  public void publish(String queueName, String message) {
+    Queue queue = new Queue(queueName);
+    this.admin.declareQueue(queue);
+    amqpTemplate.convertAndSend(queueName, message);
+  }
 }

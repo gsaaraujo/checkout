@@ -7,24 +7,26 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.http.MediaType;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.amqp.core.QueueInformation;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import com.gsa.ecommerce.core.infra.database.CartDatabase;
-import com.gsa.ecommerce.core.infra.database.CartItemDatabase;
-import com.gsa.ecommerce.core.infra.database.CustomerDatabase;
-import com.gsa.ecommerce.core.infra.database.OrderDatabase;
-import com.gsa.ecommerce.core.infra.database.OrderItemDatabase;
-import com.gsa.ecommerce.core.infra.database.ProductDatabase;
-import com.gsa.ecommerce.core.infra.database.orms.CartItemOrm;
-import com.gsa.ecommerce.core.infra.database.orms.CartOrm;
-import com.gsa.ecommerce.core.infra.database.orms.CustomerOrm;
-import com.gsa.ecommerce.core.infra.database.orms.ProductOrm;
-
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
+import com.gsa.ecommerce.core.infra.database.CartDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.CartOrm;
+import com.gsa.ecommerce.core.infra.database.OrderDatabase;
+import com.gsa.ecommerce.core.infra.database.ProductDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.ProductOrm;
+import com.gsa.ecommerce.core.infra.database.CartItemDatabase;
+import com.gsa.ecommerce.core.infra.database.CustomerDatabase;
+import com.gsa.ecommerce.core.infra.database.orms.CartItemOrm;
+import com.gsa.ecommerce.core.infra.database.orms.CustomerOrm;
+import com.gsa.ecommerce.core.infra.database.OrderItemDatabase;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -37,11 +39,13 @@ public class PlaceOrderControllerTest {
   private final CartItemDatabase cartItemDatabase;
   private final OrderItemDatabase orderItemDatabase;
   private final OrderDatabase orderDatabase;
+  private RabbitAdmin rabbitAdmin;
 
   @Autowired
   public PlaceOrderControllerTest(MockMvc mockMvc, ProductDatabase productDatabase,
       CustomerDatabase customerDatabase, CartDatabase cartDatabase, CartItemDatabase cartItemDatabase,
-      OrderItemDatabase orderItemDatabase, OrderDatabase orderDatabase) {
+      OrderItemDatabase orderItemDatabase, OrderDatabase orderDatabase,
+      RabbitAdmin rabbitAdmin) {
     this.mockMvc = mockMvc;
     this.productDatabase = productDatabase;
     this.customerDatabase = customerDatabase;
@@ -49,6 +53,7 @@ public class PlaceOrderControllerTest {
     this.cartItemDatabase = cartItemDatabase;
     this.orderItemDatabase = orderItemDatabase;
     this.orderDatabase = orderDatabase;
+    this.rabbitAdmin = rabbitAdmin;
   }
 
   @BeforeEach
@@ -59,6 +64,7 @@ public class PlaceOrderControllerTest {
     this.cartDatabase.deleteAll();
     this.customerDatabase.deleteAll();
     this.productDatabase.deleteAll();
+    this.rabbitAdmin.purgeQueue("paymentProcess");
   }
 
   @Test
@@ -82,6 +88,9 @@ public class PlaceOrderControllerTest {
             """))
         .andExpect(MockMvcResultMatchers.status().isNoContent())
         .andExpect(MockMvcResultMatchers.content().string(""));
+
+    QueueInformation queueInformation = this.rabbitAdmin.getQueueInfo("paymentProcess");
+    assertEquals(1, queueInformation.getMessageCount());
   }
 
   @Test

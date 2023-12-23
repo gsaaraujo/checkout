@@ -11,7 +11,7 @@ public class FakeMessageQueue implements MessageQueue {
   }
 
   @Override
-  public void publish(String queueName, Object message) {
+  public void publish(String queueName, String message) {
     this.messages.put(queueName, message);
   }
 }
